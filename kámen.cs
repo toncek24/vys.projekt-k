@@ -12,7 +12,31 @@
 
             if (!Array.Exists(moznosti, prvek => prvek == VolbaHrace))
 
+            {
+                Console.WriteLine("Neplatná volba");
+                return;
+            }
+            int indexPocitace = rnd.Next(moznosti.Lenght);
+            string volbaPocitace = moznosti[indexPocitace];
 
+            Console.WriteLine($"Počítač zvolil {volbaPocitace}");
+
+            if (volbaPocitace == VolbaHrace)
+            {
+                Console.WriteLine("remíza");
+            }
+            else if ((VolbaHrace == "kámen" && volbaPocitace == "Nůžky") ||
+                     (VolbaHrace == "nůžky" && volbaPocitace == "papír") ||
+                     (volbaHrace == "papír" && volbaPocitace == "kámen"))
+
+            {
+                Console.WriteLine ("Vyhrála jsi");
+            }
+
+            else
+            {
+                Console.WriteLine("prohrál jsi!");
+            }
         }
     }
 }
