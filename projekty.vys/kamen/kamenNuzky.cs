@@ -1,6 +1,6 @@
 ﻿namespace kamen
 {
-    internal class Program
+    internal class kamenNuzky
     {
         static void Main()
         {
