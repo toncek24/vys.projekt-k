@@ -1,4 +1,4 @@
-﻿namespace vys.projekt_
+﻿namespace kamen
 {
     internal class Program
     {
@@ -30,7 +30,7 @@
                      (VolbaHrace == "papír" && volbaPocitace == "kámen"))
 
             {
-                Console.WriteLine ("Vyhrála jsi");
+                Console.WriteLine("Vyhrála jsi");
             }
 
             else
@@ -40,3 +40,4 @@
         }
     }
 }
+
