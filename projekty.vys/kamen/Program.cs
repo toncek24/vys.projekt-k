@@ -16,7 +16,7 @@
 
                 {
                     Console.WriteLine("Neplatná volba");
-                    return;
+                  
                 }
                 int indexPocitace = rnd.Next(moznosti.Length);
                 string volbaPocitace = moznosti[indexPocitace];
