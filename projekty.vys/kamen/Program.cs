@@ -7,35 +7,38 @@
             string[] moznosti = { "kámen", "nůžky", "papír" };
             Random rnd = new Random();
 
-            Console.Write("Vyber si Kámen, nůžky, nebo papír!");
-            string VolbaHrace = Console.Readline().To.Lower();
-
-            if (!Array.Exists(moznosti, prvek => prvek == VolbaHrace))
-
+            while (true)
             {
-                Console.WriteLine("Neplatná volba");
-                return;
-            }
-            int indexPocitace = rnd.Next(moznosti.Lenght);
-            string volbaPocitace = moznosti[indexPocitace];
+                Console.Write("Vyber si Kámen, nůžky, nebo papír! ");
+                string VolbaHrace = Console.ReadLine().ToLower();
 
-            Console.WriteLine($"Počítač zvolil {volbaPocitace}");
+                if (!Array.Exists(moznosti, prvek => prvek == VolbaHrace))
 
-            if (volbaPocitace == VolbaHrace)
-            {
-                Console.WriteLine("remíza");
-            }
-            else if ((VolbaHrace == "kámen" && volbaPocitace == "Nůžky") ||
-                     (VolbaHrace == "nůžky" && volbaPocitace == "papír") ||
-                     (VolbaHrace == "papír" && volbaPocitace == "kámen"))
+                {
+                    Console.WriteLine("Neplatná volba");
+                    return;
+                }
+                int indexPocitace = rnd.Next(moznosti.Length);
+                string volbaPocitace = moznosti[indexPocitace];
 
-            {
-                Console.WriteLine("Vyhrála jsi");
-            }
+                Console.WriteLine($"Počítač zvolil {volbaPocitace}");
 
-            else
-            {
-                Console.WriteLine("prohrál jsi!");
+                if (volbaPocitace == VolbaHrace)
+                {
+                    Console.WriteLine("remíza");
+                }
+                else if ((VolbaHrace == "kámen" && volbaPocitace == "Nůžky") ||
+                         (VolbaHrace == "nůžky" && volbaPocitace == "papír") ||
+                         (VolbaHrace == "papír" && volbaPocitace == "kámen"))
+
+                {
+                    Console.WriteLine("Vyhrála jsi");
+                }
+
+                else
+                {
+                    Console.WriteLine("prohrál jsi!");
+                }
             }
         }
     }
