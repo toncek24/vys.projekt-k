@@ -32,7 +32,7 @@
                          (VolbaHrace == "papír" && volbaPocitace == "kámen"))
 
                 {
-                    Console.WriteLine("Vyhrála jsi");
+                    Console.WriteLine("Vyhrál jsi");
                 }
 
                 else
