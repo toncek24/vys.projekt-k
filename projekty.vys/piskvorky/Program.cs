@@ -73,3 +73,4 @@ namespace kamen
             return false;
         }
     }
+}
