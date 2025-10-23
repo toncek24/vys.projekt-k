@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace hravys
 {
@@ -15,7 +16,7 @@ namespace hravys
         private int _clankerSize = 50;
         private float _speed = 5f;
         private Texture2D _wallTexture;
-        private Rectangle _wallRect;
+        private List<Rectangle> _walls; 
 
         public Game1()
         {
@@ -37,23 +38,33 @@ namespace hravys
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _wallTexture = new Texture2D(GraphicsDevice, 1, 1);
-            _wallTexture.SetData(new[] { Color.Black });
             _clankerTexture = new Texture2D(GraphicsDevice, 1, 1);
             _clankerTexture.SetData(new[] { Color.CornflowerBlue });
+            _wallTexture = new Texture2D(GraphicsDevice, 1, 1);
+            _wallTexture.SetData(new[] { Color.Gray });
 
-            int wallWidth = 200;
-            int wallHeight = 40;
             int screenWidth = _graphics.PreferredBackBufferWidth;
             int screenHeight = _graphics.PreferredBackBufferHeight;
 
-            _wallRect = new Rectangle(
-                (screenWidth / 2) + 150,  // move 150px right from center
-                (screenHeight / 2) - (wallHeight / 2),
-                wallWidth,
-                wallHeight
-            );
+            _walls = new List<Rectangle>
+{
+                // Top wall
+                new Rectangle(10, 100, 60, 20),
+
+                // Bottom wall
+                new Rectangle(100, 40, 600, 20),
+
+                // Left wall
+                new Rectangle(60, 100, 20, 320),
+
+                // Right wall
+                new Rectangle(680, 100, 20, 320),
+
+                // Middle vertical wall
+                new Rectangle(400, 20, 20, 160)
+            };
         }
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -74,22 +85,26 @@ namespace hravys
 
             base.Update(gameTime);
 
+            // Clanker rectangle
             Rectangle clankerRect = new Rectangle(
                 (int)_clankerPosition.X,
                 (int)_clankerPosition.Y,
                 _clankerSize,
                 _clankerSize
-            ); ;
+            );
 
-                        // If colliding with wall, push clanker back
-                        if (clankerRect.Intersects(_wallRect))
-                        {
-                            // Simple collision resolution: move clanker back opposite its velocity
-                            if (k.IsKeyDown(Keys.W)) _clankerPosition.Y += _speed;
-                            if (k.IsKeyDown(Keys.S)) _clankerPosition.Y -= _speed;
-                            if (k.IsKeyDown(Keys.A)) _clankerPosition.X += _speed;
-                            if (k.IsKeyDown(Keys.D)) _clankerPosition.X -= _speed;
-                        }
+            // Check each wall for collisions
+            foreach (var wall in _walls)
+            {
+                if (clankerRect.Intersects(wall))
+                {
+                    // Simple collision response
+                    if (k.IsKeyDown(Keys.W)) _clankerPosition.Y += _speed;
+                    if (k.IsKeyDown(Keys.S)) _clankerPosition.Y -= _speed;
+                    if (k.IsKeyDown(Keys.A)) _clankerPosition.X += _speed;
+                    if (k.IsKeyDown(Keys.D)) _clankerPosition.X -= _speed;
+                }
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -98,7 +113,10 @@ namespace hravys
 
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_wallTexture, _wallRect, Color.Gray);
+            foreach (var wall in _walls)
+            {
+                _spriteBatch.Draw(_wallTexture, wall, Color.Gray);
+            }
 
             _spriteBatch.Draw(
                 _clankerTexture,
