@@ -49,19 +49,19 @@ namespace hravys
             _walls = new List<Rectangle>
 {
                 // Top wall
-                new Rectangle(10, 100, 60, 20),
+                new Rectangle(67, 67, 67, 67),
 
                 // Bottom wall
-                new Rectangle(100, 40, 600, 20),
+                new Rectangle(100, 300, 500, 25),
 
                 // Left wall
-                new Rectangle(60, 100, 20, 320),
+                new Rectangle(60, 250, 20, 150),
 
                 // Right wall
-                new Rectangle(680, 100, 20, 320),
+                new Rectangle(680, 250, 20, 320),
 
                 // Middle vertical wall
-                new Rectangle(400, 20, 20, 160)
+                new Rectangle(400, 40, 20, 160)
             };
         }
 
